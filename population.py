@@ -103,10 +103,12 @@ class Population :
             parent_ind1 = choose_parent()
             parent_ind2 = choose_parent()
             
-            while parent_ind1 in parents_i :
-                parent_ind1 = choose_parent()
+            # the commented lines would make parents never be the same
+            # (that is each parent can only have a chance to procreate once)
+            #while parent_ind1 in parents_i :
+                #parent_ind1 = choose_parent()
             
-            while (parent_ind1 == parent_ind2) | (parent_ind2 in parents_i) :
+            while (parent_ind1 == parent_ind2) : #| (parent_ind2 in parents_i):
                 parent_ind2 = choose_parent()
             
             parents_i[i] = parent_ind1
@@ -116,6 +118,8 @@ class Population :
     
     # =========================================================================
      
+    # evalueate all the members of the population
+    # and sort them in order of fitness
     def evaluate(self):
         for ind in self.members:
             ind.evaluate()
@@ -124,12 +128,14 @@ class Population :
     
     # =========================================================================
      
-    def next_gen(self, couples = 1, agents_to_keep = 1):
+    # go to the next generation:
+    # 1 - do an evaluation and sorting of the population
+    # 2 - use the roulette wheel of probabilities to see 
+    ## which parents will procreate (number of couples passed in as argument)
+    # 3 - make those parents procreate and have children
+    # 4 - the parents perish and the children take their places
+    def next_gen(self, couples = 1):
         self.evaluate()
-        
-        to_keep = [np.NaN] * int(agents_to_keep)
-        for i in range (0, agents_to_keep):
-            to_keep[i] = self.members[i]
             
         parent_indeces = self.roulette_wheel(couples).astype(int)
         
@@ -137,11 +143,8 @@ class Population :
             p1 = self.members[parent_indeces[i]]
             p2 = self.members[parent_indeces[i+1]]
             c1, c2 = self.crossover(p1, p2)
-            self.members[parent_indeces[i]] = c1.try_mutate()
-            self.members[parent_indeces[i+1]] = c2.try_mutate()
-        
-        #for i in range (1, agents_to_keep+1):
-         #   self.members[-i] = to_keep[i-1]
+            self.members[-(i+1)] = c1.try_mutate()
+            self.members[-(i+2)] = c2.try_mutate()
             
         return self.members
              

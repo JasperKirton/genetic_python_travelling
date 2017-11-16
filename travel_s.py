@@ -38,19 +38,19 @@ def get_tot_dist(order_of_cities_visited):
 p = pop.Population(10, 8, get_tot_dist) 
 
 
-#agent1, agent2 = p.crossover(p.members[3], p.members[4])
 
+# TEST TO SEE WHTHER THE FITNESS INCREASES (and the distance dicreases)
 
-max_gen = 4200
+max_gen = 8200 
 i=0
 while i < max_gen:
     if i % 50 == 0 :
         print('.')
     if(i % 300 == 0) : 
-        print('best fitness: ', p.evaluate()[0].fitness, ' distance: ', 
-              p.evaluate()[0].fitness+ 10000)
-    p.next_gen(2)
+        print('temporary best fitness: ', p.evaluate()[0].fitness, 
+              ' distance: ', p.evaluate()[0].fitness+ 10000)
+    p.next_gen(3) # keeping the 2 best at the moment (3 couples)
     i+=1
     
-print('best final: ', p.evaluate()[0].fitness, ' distance: ', 
+print('final best fitness : ', p.evaluate()[0].fitness, ' distance: ', 
               p.evaluate()[0].fitness+10000)
