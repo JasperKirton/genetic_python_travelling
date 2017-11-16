@@ -35,13 +35,15 @@ def get_tot_dist(order_of_cities_visited):
 # initialise a pupulation with 100 agents,
 # each with a genotype of length 8,
 # then pass in the fitness function we've just defined
-p = pop.Population(10, 8, get_tot_dist) 
+pop_number = 20
+size_of_genotype = distances_df.columns
+p = pop.Population(pop_number, size_of_genotype, get_tot_dist) 
 
 
 
 # TEST TO SEE WHTHER THE FITNESS INCREASES (and the distance dicreases)
 
-max_gen = 8200 
+max_gen = 3200 
 i=0
 while i < max_gen:
     if i % 50 == 0 :
