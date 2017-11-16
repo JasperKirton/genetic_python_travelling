@@ -36,7 +36,7 @@ def get_tot_dist(order_of_cities_visited):
 # each with a genotype of length 8,
 # then pass in the fitness function we've just defined
 pop_number = 20
-size_of_genotype = distances_df.columns
+size_of_genotype = len(distances_df.columns)
 p = pop.Population(pop_number, size_of_genotype, get_tot_dist) 
 
 
@@ -56,3 +56,4 @@ while i < max_gen:
     
 print('final best fitness : ', p.evaluate()[0].fitness, ' distance: ', 
               p.evaluate()[0].fitness+10000)
+print('final best genotype : ', p.evaluate()[-1].genotype)
