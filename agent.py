@@ -51,7 +51,7 @@ class Agent :
         return self
         
     # let's define a way to mutate by chance: 
-    def try_mutate(self, chance_as_n_between_0_and_1=0.1) :
+    def try_mutate(self, chance_as_n_between_0_and_1=0.05) :
         if random.uniform(0, 1) < chance_as_n_between_0_and_1:
             element1 = 0
             element2 = 0

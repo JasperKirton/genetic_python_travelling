@@ -140,8 +140,8 @@ class Population :
             self.members[parent_indeces[i]] = c1.try_mutate()
             self.members[parent_indeces[i+1]] = c2.try_mutate()
         
-        for i in range (1, agents_to_keep+1):
-            self.members[-i] = to_keep[i-1]
+        #for i in range (1, agents_to_keep+1):
+         #   self.members[-i] = to_keep[i-1]
             
         return self.members
              
